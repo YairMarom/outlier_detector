@@ -136,6 +136,7 @@ class OutliersDetector:
         parameters_config.headers_indixes = [0,1,2,3]
         # experiment  parameters
         parameters_config.sample_sizes = [100]  # [2000, 4000, 7000, 10000] #[100,200,500,700,1000,2000,3000,4000,5000,20000]
+        parameters_config.sample_size = 100
         parameters_config.inner_iterations = 3
         parameters_config.centers_number = 3
         parameters_config.outliers_number = 3
@@ -291,7 +292,7 @@ class OutliersDetector:
         parameters_config = OutliersDetector.parameters_config
         #P = OutliersDetector.get_points_from_file(parameters_config.input_points_file_name)
         P = SetOfPoints(P)
-        sample_size = parameters_config.sample_sizes[0]
+        sample_size = parameters_config.sample_size
         [C_cost, random_sample_cost, coreset_total_time, RANSAC_total_time, C_outliers, RANSAC_outliers,
          coreset_means, RANSAC_means, data_without_outliers, C] = OutliersDetector.run_corset(P=P, sample_size=sample_size)
         return C_cost, coreset_total_time, C_outliers, coreset_means, data_without_outliers, C

@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6da62877-6e2f-4154-adb7-269551112d24" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coreset_streamer.py" beforeDir="false" afterPath="$PROJECT_DIR$/coreset_streamer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coreset_for_weighted_centers.py" beforeDir="false" afterPath="$PROJECT_DIR$/coreset_for_weighted_centers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outlier_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/outlier_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_of_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/set_of_points.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,15 +14,15 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/outlier_detector$outlier_detector.coverage" NAME="outlier_detector Coverage Results" MODIFIED="1551618941906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/outlier_detector$main.coverage" NAME="main Coverage Results" MODIFIED="1551619152198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/outlier_detector$main.coverage" NAME="main Coverage Results" MODIFIED="1551620044159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#330#375#0" expanded="true" />
               </folding>
@@ -41,6 +38,8 @@
       <find>coreset sum of weights:</find>
       <find>EM_estimator_k_means_robust</find>
       <find>indexes</find>
+      <find>sample_sizes</find>
+      <find>sample_s</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -51,8 +50,9 @@
       <list>
         <option value="$PROJECT_DIR$/coreset_streamer.py" />
         <option value="$PROJECT_DIR$/set_of_points.py" />
-        <option value="$PROJECT_DIR$/outlier_detector.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/outlier_detector.py" />
+        <option value="$PROJECT_DIR$/coreset_for_weighted_centers.py" />
       </list>
     </option>
   </component>
@@ -177,7 +177,7 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32968536" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32968536" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -187,7 +187,7 @@
       <window_info anchor="right" id="SciView" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3994528" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -195,6 +195,30 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="0" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.32968536" />
+      <window_info anchor="bottom" id="Find" order="7" />
+      <window_info anchor="right" id="Database" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.3994528" />
+      <window_info anchor="right" id="Coverage" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="5" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -206,55 +230,15 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/outlier_detector.py</url>
-          <line>264</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
           <line>11</line>
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/coreset_streamer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/outlier_detector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="300" selection-start-line="300" selection-end-line="300" />
-          <folding>
-            <element signature="n#!!doc" />
-            <element signature="e#1387#1756#0" />
-            <element signature="e#1691#1756#0" />
-            <element signature="e#1966#2878#0" />
-            <element signature="e#2240#2856#0" />
-            <element signature="e#2692#2769#0" />
-            <element signature="e#2944#4740#0" />
-            <element signature="e#4816#5748#0" />
-            <element signature="e#4816#4904#1" />
-            <element signature="e#5160#5542#0" />
-            <element signature="e#5262#5542#0" />
-            <element signature="e#5809#6969#0" />
-            <element signature="e#7040#12769#0" />
-            <element signature="e#7040#7394#1" />
-            <element signature="e#8761#12306#0" />
-            <element signature="e#9190#10144#0" />
-            <element signature="e#13654#13711#0" />
-            <element signature="e#13988#14822#0" />
-            <element signature="e#14688#14822#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/set_of_points.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -328,10 +312,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/coreset_streamer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coreset_for_weighted_centers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/outlier_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="140" column="25" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#782#1975#0" />
+            <element signature="e#1421#1790#0" />
+            <element signature="e#1725#1790#0" />
+            <element signature="e#2036#2966#0" />
+            <element signature="e#2310#2944#0" />
+            <element signature="e#2780#2857#0" />
+            <element signature="e#3032#4864#0" />
+            <element signature="e#4940#5872#0" />
+            <element signature="e#4940#5028#1" />
+            <element signature="e#5284#5666#0" />
+            <element signature="e#5386#5666#0" />
+            <element signature="e#7215#12944#0" />
+            <element signature="e#7215#7569#1" />
+            <element signature="e#8936#12481#0" />
+            <element signature="e#9365#10319#0" />
+            <element signature="e#13023#15237#0" />
+            <element signature="e#13926#13983#0" />
+            <element signature="e#14260#15094#0" />
+            <element signature="e#14960#15094#0" />
+            <element signature="e#15575#15735#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#330#375#0" expanded="true" />
           </folding>

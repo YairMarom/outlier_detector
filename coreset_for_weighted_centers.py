@@ -98,8 +98,8 @@ class CoresetForWeightedCenters:
         size = temp_set.get_size()
         probs = temp_set.get_probabilites().reshape(1,-1)[0] #probs is an array of n elements, where the i-th element is the probabilty to choose the ith point
         all_indices = np.asarray(range(size))
-        indices_sample = np.unique(np.random.choice(all_indices, m, True, probs)) #pick a sample from the indices by the distribution defined by the sensitivities, as described in line 9 in main alg.
-        #indices_sample = np.random.choice(all_indices, m, False, probs) #pick a sample from the indices by the distribution defined by the sensitivities, as described in line 9 in main alg.
+        #indices_sample = np.unique(np.random.choice(all_indices, m, True, probs)) #pick a sample from the indices by the distribution defined by the sensitivities, as described in line 9 in main alg.
+        indices_sample = np.random.choice(all_indices, m, False, probs) #pick a sample from the indices by the distribution defined by the sensitivities, as described in line 9 in main alg.
         A = temp_set.points[indices_sample] # pick the points by the indices we sampled
         v = temp_set.weights[indices_sample].reshape(1,-1)[0] # pick the weights by the indices we sampled
         return SetOfPoints(A, v)
