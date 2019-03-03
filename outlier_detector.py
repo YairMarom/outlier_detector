@@ -28,7 +28,7 @@ class OutliersDetector:
         centers_number = parameters_config.centers_number
         outliers_number = parameters_config.outliers_number
         if is_ground_truth:
-            EM_iterations = P.get_size() * 100
+            EM_iterations = P.get_size() * parameters_config.ground_truth_factor
         size = P.get_size()
         k_centers = P.get_sample_of_points(centers_number)
         closest = P.get_closest_points_to_set_of_points(k_centers, size - outliers_number, type="by number")
@@ -41,8 +41,8 @@ class OutliersDetector:
             if current_cost < min_cost:
                 min_cost = current_cost
                 min_k_centers = k_centers
-        outliers = P.get_farthest_points_to_set_of_points(min_k_centers, outliers_number, type="by number")
-        return [min_k_centers, outliers]
+        outliers, outliers_indexes = P.get_farthest_points_to_set_of_points(min_k_centers, outliers_number, type="by number")
+        return [min_k_centers, outliers, outliers_indexes]
 
     @staticmethod
     def RANSAC(P, sample_size):
@@ -56,7 +56,7 @@ class OutliersDetector:
         while True:
             R = P.get_sample_of_points(sample_size)
             R.weights = R.weights.reshape(-1)
-            [centers, outliers] = OutliersDetector.EM_estimator_k_means_robust(R, is_ground_truth=False, EM_iterations = 1)
+            [centers, outliers, outliers_indexes] = OutliersDetector.EM_estimator_k_means_robust(R, is_ground_truth=False, EM_iterations = 1)
             closest = P.get_closest_points_to_set_of_points(centers,P_size-outliers_number,"by number")
             current_cost = closest.get_sum_of_distances_to_set_of_points(centers)
             if min_cost > current_cost:
@@ -80,7 +80,7 @@ class OutliersDetector:
         C = CoresetStreamer(sample_size=sample_size, points_number=points_number, k=k, parameters_config = parameters_config).stream(P)
         coreset_ending_time = time.time()
         coreset_total_time += coreset_ending_time - coreset_starting_time
-        [coreset_means, coreset_outliers] = OutliersDetector.EM_estimator_k_means_robust(C)
+        [coreset_means, coreset_outliers, outliers_indexes] = OutliersDetector.EM_estimator_k_means_robust(C)
         coreset_means.set_all_weights_to_specific_value(1.0)
         coreset_outliers.set_all_weights_to_specific_value(1.0)
         print("coreset_means.points: \n", coreset_means.points)
@@ -93,7 +93,7 @@ class OutliersDetector:
         RANSAC_ending_time = time.time()
         RANSAC_total_time += RANSAC_ending_time - RANSAC_starting_time
         R.weights = R.weights.reshape(-1)
-        [random_sample_means, random_sample_outliers] = OutliersDetector.EM_estimator_k_means_robust(R)
+        [random_sample_means, random_sample_outliers, outliers_indexes] = OutliersDetector.EM_estimator_k_means_robust(R)
         print("random_sample_means.points: \n", random_sample_means.points)
         print("random_sample_outliers.points: \n", random_sample_outliers.points)
         random_sample_cost = P.get_cost_to_center_without_outliers(random_sample_means, random_sample_outliers)
@@ -132,12 +132,12 @@ class OutliersDetector:
     def init_parameter_config():
         parameters_config = ParameterConfig()
         # main parameters
-        parameters_config.points_number = 4000
+        parameters_config.points_number = 2000
         parameters_config.headers_indixes = [0,1,2,3]
         # experiment  parameters
         parameters_config.sample_sizes = [100]  # [2000, 4000, 7000, 10000] #[100,200,500,700,1000,2000,3000,4000,5000,20000]
         parameters_config.inner_iterations = 3
-        parameters_config.centers_number = 5
+        parameters_config.centers_number = 3
         parameters_config.outliers_number = 3
         parameters_config.outliers_trashold_value = 300000
         # coreset parameters
@@ -145,6 +145,7 @@ class OutliersDetector:
         parameters_config.closest_to_median_rate = 0.5
         parameters_config.number_of_remains_multiply_factor = 1
         parameters_config.max_sensitivity_multiply_factor = 2
+        parameters_config.ground_truth_factor = 10
         # iterations
         parameters_config.RANSAC_iterations = 1
         parameters_config.coreset_iterations = 1
@@ -260,7 +261,8 @@ class OutliersDetector:
                             parameters_config=parameters_config).stream(P)
         coreset_ending_time = time.time()
         coreset_total_time += coreset_ending_time - coreset_starting_time
-        [coreset_means, coreset_outliers] = OutliersDetector.EM_estimator_k_means_robust(C)
+        [coreset_means, coreset_outliers, outliers_indexes] = OutliersDetector.EM_estimator_k_means_robust(C)
+        data_without_outliers = P.get_points_without_indexes(outliers_indexes)
         coreset_means.set_all_weights_to_specific_value(1.0)
         coreset_outliers.set_all_weights_to_specific_value(1.0)
         # print("coreset_means.points: \n", coreset_means.points)
@@ -281,21 +283,17 @@ class OutliersDetector:
             random_sample_cost = P.get_cost_to_center_without_outliers(random_sample_means, random_sample_outliers)
             return [corset_cost, random_sample_cost, coreset_total_time, RANSAC_total_time, coreset_outliers,
                     random_sample_outliers]
-        return [corset_cost, 0, coreset_total_time, 0, coreset_outliers, np.asarray([]), coreset_means, np.asarray([])]
+        return [corset_cost, 0, coreset_total_time, 0, coreset_outliers, np.asarray([]), coreset_means, np.asarray([]), data_without_outliers, C]
 
     @staticmethod
-    def detect():
+    def detect(P):
         OutliersDetector.init_parameter_config()
         parameters_config = OutliersDetector.parameters_config
-        P = OutliersDetector.get_points_from_file(parameters_config.input_points_file_name)
+        #P = OutliersDetector.get_points_from_file(parameters_config.input_points_file_name)
+        P = SetOfPoints(P)
         sample_size = parameters_config.sample_sizes[0]
         [C_cost, random_sample_cost, coreset_total_time, RANSAC_total_time, C_outliers, RANSAC_outliers,
-         coreset_means, RANSAC_means] = OutliersDetector.run_corset(P=P, sample_size=sample_size)
-        return C_cost, coreset_total_time, C_outliers, coreset_means
+         coreset_means, RANSAC_means, data_without_outliers, C] = OutliersDetector.run_corset(P=P, sample_size=sample_size)
+        return C_cost, coreset_total_time, C_outliers, coreset_means, data_without_outliers, C
 
 
-C_cost, coreset_total_time, C_outliers, coreset_means = OutliersDetector.detect()
-print("C_cost: ", C_cost)
-print("coreset_total_time: ", coreset_total_time)
-print("C_outliers: ", C_outliers.points)
-print("coreset_means: ", coreset_means.points)

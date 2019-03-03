@@ -3,15 +3,13 @@
 #     Paper: http://people.csail.mit.edu/dannyf/outliers.pdf    #
 #     Implemented by Yair Marom. yairmrm@gmail.com              #
 #################################################################
-
-from experiments_weighted_centers import ExperimentsWeightedCenters
+from outlier_detector import OutliersDetector
 import numpy as np
-np.set_printoptions(formatter={'float': lambda x: "{0:0.5f}".format(x)})
 
-#ExperimentsWeightedCenters.error_vs_coreset_size_streaming_2(experiment_type='synthetic')
-#ExperimentsWeightedCenters.error_vs_coreset_size_streaming(experiment_type='dataset_1')
-#ExperimentsWeightedCenters.error_vs_coreset_size_streaming(experiment_type='dataset_2')
-ExperimentsWeightedCenters.error_vs_coreset_size_streaming(experiment_type='dataset_3')
+your_data = np.random.rand(2000,5)
+C_cost, coreset_total_time, C_outliers, coreset_means, data_without_outliers, C = OutliersDetector.detect(your_data)
+data_without_outliers_points = data_without_outliers.points
+coreset = C.points
 
 
 

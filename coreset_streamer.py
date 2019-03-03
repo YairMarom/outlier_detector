@@ -57,8 +57,8 @@ class CoresetStreamer:
         while True:
             if number_of_points_read_so_far == self.points_number:
                 break
-            if number_of_points_read_so_far % int(self.points_number / 10) == 0:
-                print("Points read so far: ", number_of_points_read_so_far)
+            #if number_of_points_read_so_far % int(self.points_number / 10) == 0:
+                #print("Points read so far: ", number_of_points_read_so_far)
                 #sum_of_weights = 0
                 #for t in range(len(self.stack)):
                 #    sum_of_weights += np.sum(self.stack[t].points.weights)
@@ -77,7 +77,7 @@ class CoresetStreamer:
             new_node = self.merge_two_nodes(node1, node2)
             self.stack.append(new_node)
         C = self.stack[0].points
-        print("coreset sum of weights: ", np.sum(C.weights))
+        #print("coreset sum of weights: ", np.sum(C.weights))
         return C
 
     ######################################################################
